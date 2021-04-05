@@ -1,0 +1,6 @@
+module Pods_cpNativeApp_cpNativeAppTests {
+  umbrella header "Pods-cpNativeApp-cpNativeAppTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
