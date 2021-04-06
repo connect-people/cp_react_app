@@ -1,1 +1,4 @@
 ios/Pods/*
+Pods/*
+Podfile.lock
+node_modules
