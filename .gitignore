@@ -7,4 +7,6 @@ ios/Pods/*
 .DS_Store
 .env
 node_modules
-Pods
+Pods/*
+Podfile.lock
+node_modules
