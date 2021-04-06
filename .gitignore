@@ -1,1 +1,10 @@
 ios/Pods/*
+# dependencies
+/node_modules
+/Pods
+
+# misc
+.DS_Store
+.env
+node_modules
+Pods
