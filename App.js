@@ -84,10 +84,35 @@ class App extends Component {
   render() {
     return (
       <NavigationContainer>
-        <Stack.Navigator>
+        {/* <Stack.Navigator>
           <Stack.Screen name="Main" component={MainScreen}/>
           <Stack.Screen name="Home_Stack" component={TabHomeScreen}/>
-        </Stack.Navigator>
+        </Stack.Navigator> */}
+        <Tab.Navigator
+          initialRouteName="Home"
+          tabBarOptions={{
+            activeBackgroundColor: '#fff',
+            activeTintColor: 'black',
+            activeFontWeight: 'bold',
+            inactiveTintColor: 'black',
+            style: {
+              // backgroundColor: '#7534E2'
+              backgroundColor: '#fff'
+            }
+          }}
+          screenOptions={({route})=> ({
+            tabBarLabel:route.name,
+            tabBarIcon:({focused}) => (
+              TabBarIcon(focused, route.name)
+            )
+          })}
+        >
+          <Tab.Screen name="홈" component={HomeContainer}/>
+          <Tab.Screen name="글쓰기" component={WriteContainer}/>
+          <Tab.Screen name="검색" component={SearchContainer}/>
+          <Tab.Screen name="카테고리" component={CategoryContainer}/>
+          <Tab.Screen name="내정보" component={UserContainer}/>
+        </Tab.Navigator>
       </NavigationContainer>
       // <NavigationContainer>
       //   <Stack.Navigator 
