@@ -9,6 +9,7 @@
  import React, {Component} from 'react';
  import {View, Text, Button} from 'react-native';
  import { Header } from 'react-native-elements';
+ import UserNeedLogin from './component/UserNeedLogin';
  
  class UserContainer extends Component {
    render() {
@@ -31,7 +32,7 @@
                 justifyContent: 'center'
             }}
       >
-          <Text>UserContainer Screen</Text>
+          <UserNeedLogin/>
      </View>
      </>
      )
