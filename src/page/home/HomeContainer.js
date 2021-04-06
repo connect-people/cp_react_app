@@ -30,6 +30,12 @@
               placeholder="파트너를 검색해보세요."
               onChangeText={this.updateSearch}
               value={search}
+              showLoading={false}
+              platform={Platform.OS}
+              clearIcon={true}
+              // onChangeText={(text) => params.handleSearch(text)}
+              // onClearText={() => console.log('onClearText')}
+              cancelButtonTitle='Cancel'
             />
           </View>
             
