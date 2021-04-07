@@ -3,6 +3,7 @@ export { default as WriteContainer } from './writing/WriteContainer'
 export { default as SearchContainer } from './search/SearchContainer'
 export { default as CategoryContainer } from './category/CategoryContainer'
 export { default as UserContainer } from './user/UserContainer'
+export { default as UserNeedLogin } from './user/component/UserNeedLogin'
 export { default as LoginContainer } from './user/LoginContainer'
 
 export { default as HomeDrawerContainer } from './drawer/HomeDrawerContainer'

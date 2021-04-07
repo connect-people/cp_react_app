@@ -46,7 +46,7 @@
             }}
           >
             
-            
+            <Button title="CLICK" onPress={()=>{this.props.navigation.navigate('LoginPage')}}></Button>
             <Text>HomeContainer Screen!!!</Text>
         </View>
        </SafeAreaView>

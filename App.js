@@ -13,38 +13,37 @@ import {createStackNavigator} from '@react-navigation/stack'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import {HomeContainer, WriteContainer, SearchContainer, CategoryContainer, UserContainer} from './src/page'
+import {LoginContainer, UserNeedLogin} from './src/page'
 import TabMessageScreen from './src/message_tab';
 import TabHomeScreen from './src/home_tab';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
-
 MainScreen = () => {
   return(
     <Tab.Navigator
-          initialRouteName="Home"
-          tabBarOptions={{
-            activeBackgroundColor: '#fff',
-            activeTintColor: 'black',
-            activeFontWeight: 'bold',
-            inactiveTintColor: 'black',
-            style: {
-              // backgroundColor: '#7534E2'
-              backgroundColor: '#fff'
-            }
-          }}
-          screenOptions={({route})=> ({
-            tabBarLabel:route.name,
-            tabBarIcon:({focused}) => (
-              TabBarIcon(focused, route.name)
-            )
-          })}
-        >
-          <Tab.Screen name="홈" component={HomeContainer}/>
-          <Tab.Screen name="글쓰기" component={WriteContainer}/>
-          <Tab.Screen name="검색" component={SearchContainer}/>
-          <Tab.Screen name="카테고리" component={CategoryContainer}/>
-          <Tab.Screen name="내정보" component={UserContainer}/>
-        </Tab.Navigator>
+      initialRouteName="Home"
+      tabBarOptions={{
+        activeBackgroundColor: '#fff',
+        activeTintColor: 'black',
+        activeFontWeight: 'bold',
+        inactiveTintColor: 'black',
+        style: {
+          backgroundColor: '#fff'
+        }
+      }}
+      screenOptions={({route})=> ({
+        tabBarLabel:route.name,
+        tabBarIcon:({focused}) => (
+          TabBarIcon(focused, route.name)
+        )
+      })}
+    >
+      <Tab.Screen name="홈" component={HomeContainer}/>
+      <Tab.Screen name="글쓰기" component={WriteContainer}/>
+      <Tab.Screen name="검색" component={SearchContainer}/>
+      <Tab.Screen name="카테고리" component={CategoryContainer}/>
+      <Tab.Screen name="내정보" component={UserContainer}/>
+    </Tab.Navigator>
   )
 }
 
@@ -84,40 +83,27 @@ class App extends Component {
   // }
   render() {
     return (
-
-      <SafeAreaProvider>
         <NavigationContainer>
-          {/* <Stack.Navigator>
-            <Stack.Screen name="Main" component={MainScreen}/>
-            <Stack.Screen name="Home_Stack" component={TabHomeScreen}/>
-          </Stack.Navigator> */}
-          <Tab.Navigator
-            initialRouteName="Home"
-            tabBarOptions={{
-              activeBackgroundColor: '#fff',
-              activeTintColor: 'black',
-              activeFontWeight: 'bold',
-              inactiveTintColor: 'black',
-              style: {
-                // backgroundColor: '#7534E2'
-                backgroundColor: '#fff'
-              }
+          <Stack.Navigator 
+          screenOptions= {{
+              // title: 'User screen',
+              headerStyle: {
+                backgroundColor: '#7534E2'
+              },
+              headerTintColor: '#fff',
+              headerTitleStyle:{
+                  fontSize: 18,
+                  fontWeight: 'bold',
+                  color: '#fff'
+              },
             }}
-            screenOptions={({route})=> ({
-              tabBarLabel:route.name,
-              tabBarIcon:({focused}) => (
-                TabBarIcon(focused, route.name)
-              )
-            })}
-          >
-            <Tab.Screen name="홈" component={HomeContainer}/>
-            <Tab.Screen name="글쓰기" component={WriteContainer}/>
-            <Tab.Screen name="검색" component={SearchContainer}/>
-            <Tab.Screen name="카테고리" component={CategoryContainer}/>
-            <Tab.Screen name="내정보" component={UserContainer}/>
-          </Tab.Navigator>
+            
+          initialRouteName="Main">
+            <Stack.Screen name="Main" component={MainScreen} options={{headerShown: false}}/>
+            <Stack.Screen name="UserNeedLogin" component={UserNeedLogin}/>
+            <Stack.Screen name="LoginPage" component={LoginContainer} options={{headerShown: false}}/>
+          </Stack.Navigator>
         </NavigationContainer>
-      </SafeAreaProvider>
       // <NavigationContainer>
       //   <Stack.Navigator 
       //     initialRouteName="Home"

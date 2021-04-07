@@ -15,10 +15,13 @@
  
  class LoginContainer extends Component {
    render() {
+       const goBack = () =>{
+            this.props.navigation.replace("UserNeedLogin")
+       }
      return (
        <>
         <Header
-          leftComponent={{ color: '#fff' }}
+          leftComponent={{ icon: 'arrow-back', color: '#fff' , onPress:() => this.props.navigation.goBack(null) }}
           centerComponent={{ text: '로그인', style: { color: '#fff', fontSize:20, fontWeight:'600' } }}
           rightComponent={{ color: '#fff' }}
           backgroundColor='#7534E2'
@@ -47,7 +50,9 @@
                         <Text style={styles.txtFind}>비밀번호찾기</Text>
                     </Pressable>
                 </View>
-                <ButtonDefault/>
+                <View style={styles.containerBtn}>
+                    <ButtonDefault contant="로그인"/>
+                </View>
                 <View style={styles.containerJoin}>
                     <Text style={styles.txtWelcom}>처음이신가요?</Text>
                     <Pressable>
@@ -81,7 +86,7 @@ const styles = StyleSheet.create({
         margin:30
     },
     containerFindWrap:{
-        flexWrap: "wrap",
+        flexWrap: 'wrap',
         width: '100%',
         top: 0,
         right: 0,
@@ -104,6 +109,12 @@ const styles = StyleSheet.create({
         marginTop: 50,
         padding: 20,
         backgroundColor: 'green'
+    },
+    containerBtn: {
+        flexWrap: 'wrap',
+        width: '100%',
+        marginTop:70,
+        marginBottom:20,
     },
     bar:{
         marginLeft:4,

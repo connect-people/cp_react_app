@@ -12,12 +12,12 @@
 import { TextInput } from 'react-native-gesture-handler';
 
 
-const ButtonDefault = ( data ) => {
+const ButtonDefault = ({contant}) => {
     return (
         // <TouchableHighlight onPress={this._onPressButton} underlayColor="#fff">
         <TouchableHighlight underlayColor="#fff" style={styles.container}>
           <View style={styles.button}>
-            <Text style={styles.buttonText}>로그인</Text>
+            <Text style={styles.buttonText}>{contant}</Text>
           </View>
         </TouchableHighlight>
      )
@@ -26,11 +26,9 @@ const ButtonDefault = ( data ) => {
  const styles = StyleSheet.create({
     container: {
         width: '100%',
-        paddingTop: 60,
       },
       button: {
         width: '100%',
-        marginBottom: 30,
         alignItems: 'stretch',
         backgroundColor: '#7534E2'
       },
@@ -38,7 +36,8 @@ const ButtonDefault = ( data ) => {
         width: '100%',
         textAlign: 'center',
         padding: 20,
-        color: 'white'
+        color: 'white',
+        fontSize: 18
       }
  })
  export default ButtonDefault;
