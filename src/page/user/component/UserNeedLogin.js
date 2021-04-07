@@ -76,7 +76,7 @@
       });
     return (
       <View style={styles.button}>
-        <TouchableOpacity >
+        <TouchableOpacity>
           <View style={styles.containerView}>
             <Text style={styles.title}>로그인이 필요합니다.</Text>
             <Icon name="caretright" size={18} style={styles.iconArrow} />

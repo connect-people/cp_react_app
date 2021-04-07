@@ -16,9 +16,9 @@
      return (
       <>
         <Header
-          leftComponent={{ color: '#fff' }}
+          // leftComponent={{ color: '#fff' }}
           centerComponent={{ text: '내정보', style: { color: '#fff', fontSize:20, fontWeight:'600' } }}
-          rightComponent={{ color: '#fff' }}
+          // rightComponent={{ color: '#fff' }}
           backgroundColor='#7534E2'
           style={{
             flex:2,
@@ -27,10 +27,10 @@
           }}
         />
       <View style={{
-                flex:1,
-                alignItems:'center',
-                justifyContent: 'center'
-            }}
+          flex:1,
+          alignItems:'center',
+          justifyContent: 'center'
+      }}
       >
           <UserNeedLogin/>
      </View>
