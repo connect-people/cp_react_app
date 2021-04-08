@@ -13,15 +13,12 @@
  import ButtonDefault from '../../component/molecules/ButtonDefault'
 
  
- class LoginContainer extends Component {
-   render() {
-       const goBack = () =>{
-            this.props.navigation.replace("UserNeedLogin")
-       }
+ const LoginContainer = ({navigation}) =>{
      return (
        <>
-        <Header
-          leftComponent={{ icon: 'arrow-back', color: '#fff' , onPress:() => this.props.navigation.goBack(null) }}
+        {/* <Header
+          leftComponent={{ icon: 'arrow-back', color: '#fff', 
+          onPress:() => this.props.navigation.goBack(null) }}
           centerComponent={{ text: '로그인', style: { color: '#fff', fontSize:20, fontWeight:'600' } }}
           rightComponent={{ color: '#fff' }}
           backgroundColor='#7534E2'
@@ -30,12 +27,15 @@
             alignItems:'center',
             justifyContent: 'center',
           }}
-        />
+          navigation={navigation}
+        /> */}
         <View style={styles.containerHeader}>
             <Text style={styles.txtTitle}>환영합니다!</Text>
             <Text style={styles.txtDesc}>가입하신 이메일과 패스워드를 입력해 주세요.</Text>
         </View>
         <View style={styles.containerMain}>
+            {/* <InputLogin placeholder="아이디(이메일)" autoCompleteType="email" secureTextEntry={false}/>
+            <InputLogin placeholder="비밀번호" autoCompleteType="password"  secureTextEntry={true}/> */}
             <InputLogin placeholder="아이디(이메일)" autoCompleteType="email"/>
             <InputLogin placeholder="비밀번호" autoCompleteType="password"/>
             <View style={styles.containerFindWrap}>
@@ -55,7 +55,7 @@
                 </View>
                 <View style={styles.containerJoin}>
                     <Text style={styles.txtWelcom}>처음이신가요?</Text>
-                    <Pressable>
+                    <Pressable onPress={() => navigation.navigate('JoinPage')} navigation={navigation}>
                         <Text style={styles.btnJoin}>회원가입</Text>
                     </Pressable>
                 </View>
@@ -63,7 +63,6 @@
         </View>
        </>
      )
-   }
  }
  
 const styles = StyleSheet.create({

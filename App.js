@@ -12,10 +12,16 @@ import {NavigationContainer} from '@react-navigation/native'
 import {createStackNavigator} from '@react-navigation/stack'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import {HomeContainer, WriteContainer, SearchContainer, CategoryContainer, UserContainer} from './src/page'
-import {LoginContainer, UserNeedLogin} from './src/page'
-import TabMessageScreen from './src/message_tab';
-import TabHomeScreen from './src/home_tab';
+import {
+  HomeContainer, 
+  WriteContainer, 
+  SearchContainer, 
+  CategoryContainer, 
+  UserContainer,
+  LoginContainer,
+  UserNeedLogin,
+  JoinContainer
+} from './src/page'
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 MainScreen = () => {
@@ -99,9 +105,14 @@ class App extends Component {
             }}
             
           initialRouteName="Main">
+            {/* TAB 홈, 글쓰기, 검색, 카테고리, 내정보 */}
             <Stack.Screen name="Main" component={MainScreen} options={{headerShown: false}}/>
+            {/* 로그인이 요청 페이지 */}
             <Stack.Screen name="UserNeedLogin" component={UserNeedLogin}/>
-            <Stack.Screen name="LoginPage" component={LoginContainer} options={{headerShown: false}}/>
+            {/* 로그인페이지 */}
+            <Stack.Screen name="LoginPage" component={LoginContainer}/>
+            {/* 회원가입페이지 */}
+            <Stack.Screen name="JoinPage" component={JoinContainer}/>
           </Stack.Navigator>
         </NavigationContainer>
       // <NavigationContainer>
