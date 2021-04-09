@@ -31,8 +31,8 @@
             <ScrollView>
                 <View style={{
                         flex:1,
-                        padding: 30,
-                        paddingTop:40,
+                        padding: 20,
+                        paddingTop:30,
                         // alignItems:'center',
                         // justifyContent: 'center'
                     }}

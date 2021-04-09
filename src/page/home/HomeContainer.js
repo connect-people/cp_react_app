@@ -11,16 +11,16 @@
  import { SearchBar } from 'react-native-elements';
 
 
- class HomeContainer extends Component {
-    state = {
-      search: '',
-    };
+ const HomeContainer = () => {
+    // state = {
+    //   search: '',
+    // };
 
-    updateSearch = (search) => {
-      this.setState({ search });
-    };
-   render() {
-     const { search } = this.state;
+    // updateSearch = (search) => {
+    //   this.setState({ search });
+    // };
+    //  const { search } = this.state;
+    
      return (
      <>
         <StatusBar/>
@@ -28,31 +28,20 @@
           <View style={{ flex: 1 }}>
             <SearchBar
               placeholder="파트너를 검색해보세요."
-              onChangeText={this.updateSearch}
-              value={search}
-              showLoading={false}
+              // onChangeText={this.updateSearch}
+              // value={search}
+              // showLoading={false}
               platform={Platform.OS}
               clearIcon={true}
+              focus={() => navigation.navigate('LoginPage')}
               // onChangeText={(text) => params.handleSearch(text)}
               // onClearText={() => console.log('onClearText')}
               cancelButtonTitle='Cancel'
             />
           </View>
-            
-          <View style={{
-              flex:4,
-              alignItems:'center',
-              justifyContent: 'center'
-            }}
-          >
-            
-            <Button title="CLICK" onPress={()=>{this.props.navigation.navigate('LoginPage')}}></Button>
-            <Text>HomeContainer Screen!!!</Text>
-        </View>
        </SafeAreaView>
        </>
      )
-   }
  }
  
  
