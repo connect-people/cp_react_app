@@ -1,17 +1,11 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
 import 'react-native-gesture-handler';
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, Image, Button} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native'
 import {createStackNavigator} from '@react-navigation/stack'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import store from './src/redux/store'
+import { Provider } from 'react-redux'
 import {
   HomeContainer, 
   WriteContainer, 
@@ -91,6 +85,7 @@ class App extends Component {
   // }
   render() {
     return (
+      <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator 
           screenOptions= {{
@@ -119,6 +114,7 @@ class App extends Component {
             <Stack.Screen name="JoinPage" component={CategoryContainer} options={{headerShown: false}}/>
           </Stack.Navigator>
         </NavigationContainer>
+      </Provider>  
       // <NavigationContainer>
       //   <Stack.Navigator 
       //     initialRouteName="Home"

@@ -1,19 +1,16 @@
-/**
- * Sample React Native HomeScreen
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
- import 'react-native-gesture-handler';
- import React, {Component} from 'react';
- import {View, Text, Pressable, StyleSheet, Button} from 'react-native';
- import { Header } from 'react-native-elements';
- import InputLogin from '../../component/molecules/InputLogin'
- import ButtonDefault from '../../component/molecules/ButtonDefault'
+import 'react-native-gesture-handler';
+import React, {Component} from 'react';
+import {View, Text, Pressable, StyleSheet, Button} from 'react-native';
+import { useSelector, useDispatch } from 'react-redux'
+import { logOut } from '../../redux/slices/userSlice'
+import { Header } from 'react-native-elements';
+import InputLogin from '../../component/molecules/InputLogin'
+import ButtonDefault from '../../component/molecules/ButtonDefault'
 
  
  const LoginContainer = ({navigation}) =>{
+     const loginState = useSelector((state) => state.user.value)
+     const dispatch = useDispatch();
      return (
        <>
         {/* <Header
@@ -51,7 +48,9 @@
                     </Pressable>
                 </View>
                 <View style={styles.containerBtn}>
-                    <ButtonDefault contant="로그인"/>
+                    <View onClick={() => dispatch(logOut())}> 
+                        <ButtonDefault contant="로그인"/>
+                    </View>
                 </View>
                 <View style={styles.containerJoin}>
                     <Text style={styles.txtWelcom}>처음이신가요?</Text>
