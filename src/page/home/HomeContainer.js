@@ -1,12 +1,12 @@
 import 'react-native-gesture-handler';
 import React, {Component, useState, useEffect, useCallback} from 'react';
 import axios from 'axios'
-import {View, Text, Image, SafeAreaView, StatusBar, StyleSheet, FlatList, TouchableHighlight} from 'react-native';
+import {View, Text, Image, SafeAreaView, StatusBar, StyleSheet, FlatList, TouchableHighlight, Pressable} from 'react-native';
 import { SearchBar } from 'react-native-elements';
-import CardItem from '../../../src/component/molecules/CardItem'
+import CardItem from '../../component/organisms/CardItem'
 import {getData} from './api'
 
- const HomeContainer = () => {
+ const HomeContainer = (navigation) => {
     const [page, setPage] = useState(1);
     const [list, setList] = useState([]);
     
@@ -18,16 +18,23 @@ import {getData} from './api'
     //   this.setState({ search });
     // };
     //  const { search } = this.state;
-    const renderItem = useCallback(({ item, index, separators }) => (
-        //   <TouchableHighlight
+    const onPress = () => {
+
+    }
+    const renderItem = useCallback(({ item, index, separators, navigation }) => (
+        // <View
         //    style={styles.cardContainer}
-        //     key={item.key}
+        //     key={item.key}r
         //     // onPress={() => this._onPress(item)}
         //     // onShowUnderlay={separators.highlight}
         //     // onHideUnderlay={separators.unhighlight}
         //     >
-            <CardItem data={item}/>
-        //   </TouchableHighlight>
+            <CardItem 
+                data={item}
+                navigation={navigation}
+                
+            />
+        //{/* </View> */}
     ))
     const ITEM_HEIGHT = 200;
 
@@ -62,15 +69,15 @@ import {getData} from './api'
                 // onClearText={() => console.log('onClearText')}
                 cancelButtonTitle='Cancel'
                 />
-                    <FlatList
-                        numColumns={2}  
-                        columnWrapperStyle={styles.row}
-                        data={list}
-                        renderItem={renderItem}
-                        getItemLayout={getItemLayout}
-                        initialNumToRender={20}
-                        maxToRenderPerBatch={20}
-                        removeClippedSubviews={true}
+                <FlatList
+                    numColumns={2}  
+                    columnWrapperStyle={styles.row}
+                    data={list}
+                    renderItem={renderItem}
+                    getItemLayout={getItemLayout}
+                    initialNumToRender={20}
+                    maxToRenderPerBatch={20}
+                    removeClippedSubviews={true}
                 />
             </View>
         </SafeAreaView>
@@ -83,12 +90,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         width: '100%',
-        flex : 1,
-        paddingLeft:'1%',
-        paddingRight:'1%',
-        marginTop: 10,
+        // flex : 1,
+        // paddingLeft:'1%',
+        // paddingRight:'1%',
+        // marginTop: 10,
         backgroundColor: 'orange',
-        textAlign: 'left'
+        // textAlign: 'left'
     },
     row: {
         flex: 1,

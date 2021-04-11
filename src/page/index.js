@@ -12,3 +12,5 @@ export { default as HomeDrawerContainer } from './drawer/HomeDrawerContainer'
 export { default as UserDrawerContainer } from './drawer/UserDrawerContainer'
 
 
+export { default as CardContent } from '../component/organisms/CardContent'
+

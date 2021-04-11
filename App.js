@@ -15,7 +15,8 @@ import {
   LoginContainer,
   UserNeedLogin,
   JoinContainer,
-  HomeSearchContainer
+  HomeSearchContainer,
+  CardContent
 } from './src/page'
 import _Colors from './src/styles/_Colors';
 const Stack = createStackNavigator();
@@ -40,11 +41,11 @@ MainScreen = () => {
         )
       })}
     >
-      <Tab.Screen name="홈" component={HomeContainer}/>
-      <Tab.Screen name="글쓰기" component={WriteContainer}/>
-      <Tab.Screen name="검색" component={SearchContainer}/>
-      <Tab.Screen name="카테고리" component={CategoryContainer}/>
-      <Tab.Screen name="내정보" component={UserContainer}/>
+      <Tab.Screen name="HomePage" component={HomeContainer} options={{ tabBarLabel: '홈' }}/>
+      <Tab.Screen name="WritingPage" component={WriteContainer} options={{ tabBarLabel: '글쓰기' }}/>
+      <Tab.Screen name="SearchPage" component={SearchContainer} options={{ tabBarLabel: '검색' }}/>
+      <Tab.Screen name="CategoryPage" component={CategoryContainer} options={{ tabBarLabel: '카테고리' }}/>
+      <Tab.Screen name="UserPage" component={UserContainer} options={{ tabBarLabel: '내정보' }}/>
     </Tab.Navigator>
   )
 }
@@ -52,15 +53,15 @@ MainScreen = () => {
 
 const TabBarIcon = (focused, name) => {
   let iconImagePath;
-  if(name ==='홈'){
+  if(name ==='HomePage'){
     iconImagePath = require('./src/assets/images/ico/ico_tab_home.png')
-  }else if(name ==='글쓰기'){
+  }else if(name ==='WritingPage'){
     iconImagePath = require('./src/assets/images/ico/ico_tab_writing.png')
-  }else if(name ==='검색'){
+  }else if(name ==='SearchPage'){
     iconImagePath = require('./src/assets/images/ico/ico_tab_search.png')
-  }else if(name ==='카테고리'){
+  }else if(name ==='CategoryPage'){
     iconImagePath = require('./src/assets/images/ico/ico_tab_category.png')
-  }else if(name ==='내정보'){
+  }else if(name ==='UserPage'){
     iconImagePath = require('./src/assets/images/ico/ico_tab_user.png')
   }
   return (
@@ -75,21 +76,12 @@ const TabBarIcon = (focused, name) => {
 }
 
 class App extends Component {
-  // logoTitle = () => {
-  //   return (
-  //     <Image
-  //       style={{width:40, height:40}}
-  //       source={require('./src/assets/images/ico/ico_home.png')}
-  //      />
-  //   )
-  // }
   render() {
     return (
       <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator 
           screenOptions= {{
-              // title: 'User screen',
               headerStyle: {
                 backgroundColor: _Colors.mainColor,
               },
@@ -108,10 +100,18 @@ class App extends Component {
             {/* 로그인이 요청 페이지 */}
             <Stack.Screen name="UserNeedLogin" component={UserNeedLogin}/>
             {/* 로그인페이지 */}
-            <Stack.Screen name="LoginPage" component={LoginContainer}/>
+            <Stack.Screen name="LoginPage" component={LoginContainer}
+              options={{
+                title: '로그인',
+              }}
+            />
             {/* 회원가입페이지 */}
-            <Stack.Screen name="JoinPage" component={JoinContainer}/>
-            <Stack.Screen name="CategoryPage" component={CategoryContainer} options={{headerShown: false}}/>
+            <Stack.Screen name="JoinPage" component={JoinContainer}
+              options={{
+                title: '회원가입',
+              }}
+            />
+            <Stack.Screen name="ContentPage" component={CardContent}/>
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>  
