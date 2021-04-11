@@ -42,19 +42,19 @@ const InputLogin = ( data ) => {
      )
 }
  
- const styles = StyleSheet.create({
-    containerView:{
+const styles = StyleSheet.create({
+containerView:{
+    width: '100%',
+},
+    input: {
         width: '100%',
-    },
-     input: {
-         width: '100%',
-         backgroundColor: '#eee',
-         fontSize: 18,
-         padding: 10,
-         borderBottomWidth:1,
-         backgroundColor: 'transparent',
-         marginTop: 20
-     }
- })
- export default InputLogin;
+        backgroundColor: '#eee',
+        fontSize: 18,
+        padding: 10,
+        borderBottomWidth:1,
+        backgroundColor: 'transparent',
+        marginTop: 20
+    }
+})
+export default InputLogin;
  

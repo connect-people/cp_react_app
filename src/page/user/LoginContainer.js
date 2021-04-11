@@ -47,10 +47,9 @@ import ButtonDefault from '../../component/molecules/ButtonDefault'
                         <Text style={styles.txtFind}>비밀번호찾기</Text>
                     </Pressable>
                 </View>
+                {/* <View style={styles.containerBtn} onClick={() => dispatch(logOut())}> */}
                 <View style={styles.containerBtn}>
-                    <View onClick={() => dispatch(logOut())}> 
-                        <ButtonDefault contant="로그인"/>
-                    </View>
+                    <ButtonDefault contant="로그인"/>
                 </View>
                 <View style={styles.containerJoin}>
                     <Text style={styles.txtWelcom}>처음이신가요?</Text>

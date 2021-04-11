@@ -102,16 +102,16 @@ class App extends Component {
             }}
             initialRouteName="Main">
             {/* TAB 홈, 글쓰기, 검색, 카테고리, 내정보 */}
-            {/* <Stack.Screen name="Main" component={MainScreen} options={{headerShown: false}}/> */}
+            <Stack.Screen name="Main" component={MainScreen} options={{headerShown: false}}/>
             {/* 홈 검색페이지 */}
-            {/* <Stack.Screen name="HomeSearchPage" component={HomeSearchContainer}/> */}
+            <Stack.Screen name="HomeSearchPage" component={HomeSearchContainer}/>
             {/* 로그인이 요청 페이지 */}
-            {/* <Stack.Screen name="UserNeedLogin" component={UserNeedLogin}/> */}
+            <Stack.Screen name="UserNeedLogin" component={UserNeedLogin}/>
             {/* 로그인페이지 */}
-            {/* <Stack.Screen name="LoginPage" component={LoginContainer}/> */}
+            <Stack.Screen name="LoginPage" component={LoginContainer}/>
             {/* 회원가입페이지 */}
-            {/* <Stack.Screen name="JoinPage" component={JoinContainer}/> */}
-            <Stack.Screen name="JoinPage" component={CategoryContainer} options={{headerShown: false}}/>
+            <Stack.Screen name="JoinPage" component={JoinContainer}/>
+            <Stack.Screen name="CategoryPage" component={CategoryContainer} options={{headerShown: false}}/>
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>  
