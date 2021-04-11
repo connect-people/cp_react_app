@@ -1,23 +1,34 @@
-/**
- * Sample React Native HomeScreen
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
- import 'react-native-gesture-handler';
- import React, {Component} from 'react';
- import { View, Text, Image, StyleSheet } from 'react-native'
- import { Header, Card, ListItem, Button, Icon } from 'react-native-elements'
+import 'react-native-gesture-handler';
+import React, {Component} from 'react';
+import { View, Text, Image, StyleSheet, SectionList, StatusBar } from 'react-native'
+import { Header, Card, ListItem, Button, Icon } from 'react-native-elements'
 
- const CategoryContainer = () => {
-    const users = [
-      {
-         name: 'brynnbrynnbrynnbrynnbrynnbrynnbrynnbrynnbrynnbrynnbrynn',
-         avatar: 'https://d1cyiajrf0e1fn.cloudfront.net/images/storage/board/20210403/0006db47cf0162f0ca17b5eb19a86f22.jpg'
-      },
-     ]
-     return (
+const CategoryContainer = () => {
+    const DATA = [
+        {
+          title: "Main dishes",
+          data: ["Pizza", "Burger", "Risotto"]
+        },
+        {
+          title: "Sides",
+          data: ["French Fries", "Onion Rings", "Fried Shrimps"]
+        },
+        {
+          title: "Drinks",
+          data: ["Water", "Coke", "Beer"]
+        },
+        {
+          title: "Desserts",
+          data: ["Cheese Cake", "Ice Cream"]
+        }
+    ];
+    const Item = ({ title }) => (
+        <View style={styles.item}>
+          <Text style={styles.title}>{title}</Text>
+        </View>
+    );
+      
+    return (
       <>
         <Header
           leftComponent={{ color: '#fff' }}
@@ -30,50 +41,56 @@
             justifyContent: 'center',
           }}
         />
-        <View style={{
-            flex:1,
-            alignItems:'center',
-            justifyContent: 'center'
-          }}
+        <View style={styles.container}
         >
-          <Card>
-            <Card.Title>CARD WITH DIVIDER</Card.Title>
-            <Card.Divider/>
-            {
-              users.map((u, i) => {
-                return (
-                  <View key={i} style={styles.user}>
-                    <Image
-                      style={styles.image}
-                      resizeMode="cover"
-                      source={{ uri: u.avatar }}
-                    />
-                    <Text style={styles.name}>{u.name}</Text>
-                  </View>
-                );
-              })
-            }
-          </Card>
+            <SectionList
+                sections={DATA}
+                numColumns={2}                  // set number of columns 
+                columnWrapperStyle={styles.row}  // space them out evenly
+                keyExtractor={(item, index) => item + index}
+                renderItem={({ item }) => <Item title={item} />}
+                renderSectionHeader={({ section: { title } }) => (
+                    <Text style={styles.header}>{title}</Text>
+                )}
+            />
         </View>
       </>
-     )
- }
- const styles = StyleSheet.create({
-    user:{
-
-    },
-    image: {
-        width: undefined,
+    )
+}
+const styles = StyleSheet.create({
+    container: {
         flex: 1,
-        height: 100,
-        borderRadius: 8,
-        marginBottom: 7,
+        paddingTop: StatusBar.currentHeight,
+        marginHorizontal: 16,
+        backgroundColor: 'red',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        width: '100%',
+        alignSelf: 'center',
+        textAlign: 'left',
+        alignItems: 'stretch',
     },
-    name: {
-
+    row: {
+        flex: 1,
+        justifyContent: "space-around"
     },
-
- })
+    item: {
+        backgroundColor: '#ddd',
+        width: '40%',
+        padding: 10,
+        marginVertical: 8,
+        justifyContent: 'space-between',
+        alignContent: 'space-between',
+    },
+    header: {
+        fontSize: 16,
+        padding: 20,
+        backgroundColor: '#fff'
+    },
+    title: {
+        fontSize: 14,
+    }
+  });
  
  export default CategoryContainer;
  

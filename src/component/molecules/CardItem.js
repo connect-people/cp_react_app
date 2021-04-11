@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     },
     image:{
         width: '100%',
-        height: 150,
+        height: 240,
         padding: 0
     },
     areaText: {

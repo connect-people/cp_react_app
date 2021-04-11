@@ -80,20 +80,20 @@ import {getData} from './api'
  
 const styles = StyleSheet.create({
     cardContainer:{
-        flexDirection: "row",
-        flexWrap: "wrap",
+        flexDirection: 'row',
+        flexWrap: 'wrap',
         width: '100%',
         flex : 1,
         paddingLeft:'1%',
         paddingRight:'1%',
         marginTop: 10,
-        backgroundColor: "orange",
+        backgroundColor: 'orange',
         textAlign: 'left'
     },
     row: {
         flex: 1,
-        justifyContent: "space-around",
-        alignSelf: "center",
+        justifyContent: 'space-around',
+        alignSelf: 'center',
         textAlign: 'left',
     }
 })
