@@ -31,6 +31,7 @@ import {getData} from './api'
         //     >
             <CardItem 
                 data={item}
+                index={index}
                 navigation={navigation}
                 
             />

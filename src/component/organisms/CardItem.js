@@ -3,12 +3,15 @@ import React, {Component} from 'react';
 import {View, Text, Pressable, StyleSheet, Image} from 'react-native';
 import { Card, ListItem, Button, Icon } from 'react-native-elements'
  
-const CardItem = (item, pressEvent) => {
+const CardItem = (item, index, pressEvent) => {
     _onLongPressButton = () => {
         alert('You long-pressed the button!')
     }
     return (
-        <Card containerStyle={styles.cardItemOuter} wrapperStyle={styles.cardItemInner}>
+        <Card 
+        key={item.data.id}
+        containerStyle={styles.cardItemOuter} 
+        wrapperStyle={styles.cardItemInner}>
             <Pressable>
                 <Image
                     style={styles.image}

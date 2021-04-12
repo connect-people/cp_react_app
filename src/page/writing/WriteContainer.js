@@ -7,12 +7,36 @@
  */
  import 'react-native-gesture-handler';
  import React, {Component} from 'react';
- import {View, Text, Button} from 'react-native';
- import { Header } from 'react-native-elements';
+ import {View, Text, Button, FlatList} from 'react-native';
+ import { ListItem, Avatar, Header } from 'react-native-elements'
 
  
- class WriteContainer extends Component {
-   render() {
+const WriteContainer = () => {
+    const list = [
+        {
+          name: '구매자'
+        },
+        {
+          name: '판매자'
+        },
+        {
+          name: '광고/판촉/제품소개서'
+        },
+        {
+          name: '기타(운송/수송)등'
+        }
+      ]
+      
+    keyExtractor = (item, index) => index.toString()
+      
+    renderItem = ({ item }) => (
+        <ListItem bottomDivider>
+            <ListItem.Content>
+                <ListItem.Title>{item.name}</ListItem.Title>
+            </ListItem.Content>
+            <ListItem.Chevron />
+        </ListItem>
+    )
      return (
        <>
         <Header
@@ -26,18 +50,14 @@
             justifyContent: 'center',
           }}
         />
-       <View style={{
-                flex:1,
-                alignItems:'center',
-                justifyContent: 'center'
-            }}
-       >
-           <Text>WriteContainer Screen</Text>
-       </View>
+       <FlatList
+            keyExtractor={this.keyExtractor}
+            data={list}
+            renderItem={this.renderItem}
+        />
        </>
-     )
-   }
- }
+    )
+}
  
  
  export default WriteContainer;
