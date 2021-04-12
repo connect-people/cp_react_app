@@ -15,10 +15,11 @@ export const getData = async (page) => {
     }
 }
 
-export const getDetail = async (page_id) => {
+export const getDetail = async (pageId) => {
     try {
+        console.warn('TEST')
         let key = '80CFeBE4MD6JmhEfClBx7zqo1eGvwTl5EZgKyMQc'
-        return await axios.get(`'http://52.78.173.151/boards${page_id}'`,{
+        return await axios.get(`'http://52.78.173.151/boards${pageId}'`,{
             'x-api-key': key,
         })
       

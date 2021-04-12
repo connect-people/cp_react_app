@@ -21,8 +21,13 @@ import {getData} from './api'
         <TouchableOpacity 
             style={styles.listContaienr} 
             onPress={() => navigation.navigate('DetailPage', {
-                page_id: item.ID
+                page_id: item.ID,
+                title: item.title,
+                content: item.content,
+                imageUrl: item.imageUrl,
+
             })}
+            navigation={navigation}
             >
             <Card 
                 key={item.ID}
@@ -83,7 +88,6 @@ import {getData} from './api'
                     getItemLayout={getItemLayout}
                     onEndReachedThreshold={0.8}
                     initialNumToRender={20}
-                    maxToRenderPerBatch={20}
                     removeClippedSubviews={true}
                 />
             </View>
