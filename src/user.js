@@ -43,7 +43,7 @@ class UserScreen extends Component {
             <Button 
                 title="To Home Screen"
                 onPress={()=>{
-                    this.props.navigation.navigate('Home')
+                    this.props.navigation.navigate('HomePage')
                 }}
             />
             <Text>User Idx : {JSON.stringify(userIdx)}</Text>

@@ -18,7 +18,7 @@ import { createStackNavigator } from '@react-navigation/stack';
     
     return (
       <View style={styles.button}>
-        <TouchableOpacity  navigation={navigation} onPress={() => navigation.navigate('LoginPage')}>
+        <TouchableOpacity navigation={navigation} onPress={() => navigation.navigate('LoginPage')}>
           <View style={styles.containerView}>
             <Text style={styles.title}>로그인이 필요합니다.</Text>
             <Icon name="caretright" size={18} style={styles.iconArrow} />

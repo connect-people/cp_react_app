@@ -2,38 +2,35 @@ import 'react-native-gesture-handler';
 import React, {Component} from 'react';
 import {View, Text, Pressable, StyleSheet, Image} from 'react-native';
 import { Card, ListItem, Button, Icon } from 'react-native-elements'
+import { debug } from 'react-native-reanimated';
  
-const CardItem = (item, index, pressEvent) => {
-    _onLongPressButton = () => {
-        alert('You long-pressed the button!')
-    }
+const CardItem = (item, onPress, navigation, props) => {
     return (
         <Card 
         key={item.data.id}
         containerStyle={styles.cardItemOuter} 
         wrapperStyle={styles.cardItemInner}>
-            <Pressable>
-                <Image
-                    style={styles.image}
-                    resizeMode="cover"
-                    source={{ uri: item.data.imageUrl }}
-                />
-                <View style={styles.areaText}>
-                    <Text numberOfLines={1} style={styles.cardTitle}>{item.data.title}</Text>
-                    <Text numberOfLines={1} style={styles.cardDesc}>{item.data.title}</Text>
-                </View>
-            </Pressable>
+            <Image
+                style={styles.image}
+                resizeMode="cover"
+                source={{ uri: item.data.imageUrl }}
+            />
+            <View style={styles.areaText}>
+                <Text numberOfLines={1} style={styles.cardTitle}>{item.data.title}</Text>
+                <Text numberOfLines={1} style={styles.cardDesc}>{item.data.title}</Text>
+            </View>
         </Card>
     )
 }
 const styles = StyleSheet.create({
     cardItemOuter:{
-        width: '46%',
+        width: '100%',
         height: 280,
         margin: '2%',
         padding: 0,
         marginTop: '4%',
-        alignSelf: "flex-start",
+        alignSelf: "center",
+        borderWidth: 0,
     },
     cardItemInner:{
         padding: 0,

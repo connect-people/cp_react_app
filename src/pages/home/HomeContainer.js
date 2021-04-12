@@ -1,12 +1,11 @@
 import 'react-native-gesture-handler';
-import React, {Component, useState, useEffect, useCallback} from 'react';
-import axios from 'axios'
-import {View, Text, Image, SafeAreaView, StatusBar, StyleSheet, FlatList, TouchableHighlight, Pressable} from 'react-native';
+import React, {useState, useEffect, useCallback} from 'react';
+import {View, Text, Image, SafeAreaView, StatusBar, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
 import { SearchBar } from 'react-native-elements';
-import CardItem from '../../component/organisms/CardItem'
+import { Card} from 'react-native-elements'
 import {getData} from './api'
 
- const HomeContainer = (navigation) => {
+ const HomeContainer = ({navigation}) => {
     const [page, setPage] = useState(1);
     const [list, setList] = useState([]);
     
@@ -18,24 +17,29 @@ import {getData} from './api'
     //   this.setState({ search });
     // };
     //  const { search } = this.state;
-    const onPress = () => {
-
-    }
-    const renderItem = useCallback(({ item, index, separators, navigation }) => (
-        // <View
-        //    style={styles.cardContainer}
-        //     key={item.key}r
-        //     // onPress={() => this._onPress(item)}
-        //     // onShowUnderlay={separators.highlight}
-        //     // onHideUnderlay={separators.unhighlight}
-        //     >
-            <CardItem 
-                data={item}
-                index={index}
-                navigation={navigation}
-                
-            />
-        //{/* </View> */}
+    const renderItem = useCallback(({ item, index, separators }) => (
+        <TouchableOpacity 
+            style={styles.listContaienr} 
+            onPress={() => navigation.navigate('DetailPage', {
+                page_id: item.ID
+            })}
+            >
+            <Card 
+                key={item.ID}
+                containerStyle={styles.cardItemOuter} 
+                wrapperStyle={styles.cardItemInner}>
+                <Image
+                    style={styles.image}
+                    resizeMode="cover"
+                    source={{ uri: item.imageUrl }}
+                />
+                <View style={styles.areaText}>
+                    <Text numberOfLines={1} style={styles.cardTitle}>{item.title}{item.ID}</Text>
+                    <Text numberOfLines={1} style={styles.cardDesc}>{item.content}</Text>
+                </View>
+            </Card>
+            
+        </TouchableOpacity>    
     ))
     const ITEM_HEIGHT = 200;
 
@@ -74,8 +78,10 @@ import {getData} from './api'
                     numColumns={2}  
                     columnWrapperStyle={styles.row}
                     data={list}
+                    keyExtractor={(item) => item.ID}
                     renderItem={renderItem}
                     getItemLayout={getItemLayout}
+                    onEndReachedThreshold={0.8}
                     initialNumToRender={20}
                     maxToRenderPerBatch={20}
                     removeClippedSubviews={true}
@@ -87,22 +93,57 @@ import {getData} from './api'
 }
  
 const styles = StyleSheet.create({
+    listContaienr: {
+        width: '48%',
+        height: 280,
+        padding: 0,
+        margin: '1%',
+        alignSelf: "flex-start",
+    },
     cardContainer:{
         flexDirection: 'row',
         flexWrap: 'wrap',
         width: '100%',
-        // flex : 1,
-        // paddingLeft:'1%',
-        // paddingRight:'1%',
-        // marginTop: 10,
         backgroundColor: 'orange',
-        // textAlign: 'left'
+        justifyContent: 'space-around',
     },
     row: {
         flex: 1,
         justifyContent: 'space-around',
         alignSelf: 'center',
         textAlign: 'left',
+    },
+
+
+
+    //card
+    cardItemOuter:{
+        width: '100%',
+        height: 280,
+        margin: '2%',
+        padding: 0,
+        marginTop: '4%',
+        alignSelf: "center",
+        borderWidth: 0,
+    },
+    cardItemInner:{
+        padding: 0,
+    },
+    image:{
+        width: '100%',
+        height: 220,
+        padding: 0
+    },
+    areaText: {
+        padding: '4%'
+    },
+    cardTitle:{
+        fontSize: 16,
+        fontWeight: 'bold'
+    },
+    cardDesc: {
+        fontSize: 14,
+        marginTop: 5,
     }
 })
  export default HomeContainer;

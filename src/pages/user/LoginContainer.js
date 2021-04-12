@@ -9,8 +9,8 @@ import ButtonDefault from '../../component/molecules/ButtonDefault'
 
  
  const LoginContainer = ({navigation}) =>{
-     const loginState = useSelector((state) => state.user.value)
-     const dispatch = useDispatch();
+    //  const loginState = useSelector((state) => state.user.value)
+    //  const dispatch = useDispatch();
      return (
        <>
         {/* <Header
