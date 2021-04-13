@@ -39,7 +39,7 @@ import {getData} from './api'
                     source={{ uri: item.imageUrl }}
                 />
                 <View style={styles.areaText}>
-                    <Text numberOfLines={1} style={styles.cardTitle}>{item.title}{item.ID}</Text>
+                    <Text numberOfLines={1} style={styles.cardTitle}>{item.title}</Text>
                     <Text numberOfLines={1} style={styles.cardDesc}>{item.content}</Text>
                 </View>
             </Card>

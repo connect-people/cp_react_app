@@ -1,20 +1,11 @@
 import 'react-native-gesture-handler';
 import React, {Component, useEffect, useState} from 'react';
-import {View, Text, ScrollView, Image, StyleSheet, SafeAreaView, StatusBar} from 'react-native';
-import CardContent from '../../component/organisms/CardContent';
-import {getDetail} from './api'
-import {
-    SharedElement,
-    SharedElementTransition,
-    nodeFromRef
-} from 'react-native-shared-element';
-
-
+import {View, Text, ScrollView, Image, StyleSheet, SafeAreaView, StatusBar, Linking} from 'react-native';
+import Hyperlink from 'react-native-hyperlink'
 
 const HomeDescContainer = (props) => {
     const [data, setData] = useState({});
-    const {page_id, item, title, content, imageUrl} =props.route.params
-    const { navigation, route, modal, resizeMode, onPress } = props;
+    const {page_id, item, title, content, imageUrl} =props.route.params;
     // useEffect(async () => {
     //     const data = await getDetail(pageId).then(response=>{
     //         return response.data.itmes;
@@ -31,7 +22,13 @@ const HomeDescContainer = (props) => {
                         source={{ uri: imageUrl }}
                     />
                     <Text style={styles.title}>{title}</Text>
-                    <Text style={styles.content}>{content}</Text>
+                    <Hyperlink 
+                        linkStyle={ { color: '#2980b9'} }
+                        onPress={ (url) => Linking.openURL(url) }>
+                        <View style={styles.content}>
+                            <Text style={styles.fontStyle}>{content}</Text>
+                        </View>
+                    </Hyperlink>
                 </View>
             </ScrollView>
         </SafeAreaView>
@@ -75,10 +72,11 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
       },
       content: {
-        width: '100%',
         marginTop: 20,
         padding: 20,
-        fontSize: 16,
         textAlign: 'left',
       },
+      fontStyle: {
+        fontSize: 16,
+      }
 })
