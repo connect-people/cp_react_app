@@ -4,11 +4,29 @@ import {View, Text, Image, SafeAreaView, StatusBar, StyleSheet, FlatList, Toucha
 import { SearchBar } from 'react-native-elements';
 import { Card} from 'react-native-elements'
 import {getData} from './api'
+import _Color from '../../styles/_Colors'
 
  const HomeContainer = ({navigation}) => {
     const [page, setPage] = useState(1);
     const [list, setList] = useState([]);
-    
+    const [state, setState] = useState({
+        keyword: '',
+        data: [],
+        paging: {
+            page: 1,
+            per_page: 20,
+            total: 1
+        },
+    })
+    const { keyword, data, paging } = state;
+    const updateSearch = (keyword) => {
+      setState({ keyword });
+    };
+    const search = param => {
+        if(!param.keyword){
+            return;
+        }
+    }
     // state = {
     //   search: '',
     // };
@@ -17,35 +35,7 @@ import {getData} from './api'
     //   this.setState({ search });
     // };
     //  const { search } = this.state;
-    const renderItem = useCallback(({ item, index, separators }) => (
-        <TouchableOpacity 
-            style={styles.listContaienr} 
-            onPress={() => navigation.navigate('DetailPage', {
-                page_id: item.ID,
-                title: item.title,
-                content: item.content,
-                imageUrl: item.imageUrl,
-
-            })}
-            navigation={navigation}
-            >
-            <Card 
-                key={item.ID}
-                containerStyle={styles.cardItemOuter} 
-                wrapperStyle={styles.cardItemInner}>
-                <Image
-                    style={styles.image}
-                    resizeMode="cover"
-                    source={{ uri: item.imageUrl }}
-                />
-                <View style={styles.areaText}>
-                    <Text numberOfLines={1} style={styles.cardTitle}>{item.title}</Text>
-                    <Text numberOfLines={1} style={styles.cardDesc}>{item.content}</Text>
-                </View>
-            </Card>
-            
-        </TouchableOpacity>    
-    ))
+    
     const ITEM_HEIGHT = 200;
 
     const getItemLayout = useCallback(
@@ -62,6 +52,39 @@ import {getData} from './api'
         })
         setList((prev) => [...prev, ...list]);
     }, [page]);
+
+
+    const renderItem = useCallback(({ item, index, separators }) => (
+        <TouchableOpacity 
+            style={styles.listContaienr} 
+            onPress={() => navigation.navigate('DetailPage', {
+                page_id: item.ID,
+                title: item.title,
+                brandName: item.brandName,
+                subTitle: item.subTitle,
+                content: item.content,
+                imageUrl: item.imageUrl,
+            })}
+            navigation={navigation}
+            >
+            <Card 
+                key={item.ID}
+                containerStyle={styles.cardItemOuter} 
+                wrapperStyle={styles.cardItemInner}>
+                <Image
+                    style={styles.image}
+                    resizeMode="cover"
+                    source={{ uri: item.imageUrl }}
+                />
+                <View style={styles.areaText}>
+                    <Text style={styles.majorType}>{item.majorCategoryName}</Text>
+                    <Text numberOfLines={1} style={styles.cardTitle}>{item.title}</Text>
+                    <Text numberOfLines={1} style={styles.cardDesc}>{item.content}</Text>
+                </View>
+            </Card>
+        </TouchableOpacity>    
+    ))
+
     return (
     <>
         <StatusBar/>
@@ -69,12 +92,11 @@ import {getData} from './api'
           <View style={{ flex: 1, alignItems: 'center'}}>
             <SearchBar
                 placeholder="파트너를 검색해보세요."
-                // onChangeText={this.updateSearch}
-                // value={search}
+                onChangeText={updateSearch}
+                value={keyword}
                 // showLoading={false}
                 platform={Platform.OS}
                 clearIcon={true}
-                focus={() => navigation.navigate('LoginPage')}
                 // onChangeText={(text) => params.handleSearch(text)}
                 // onClearText={() => console.log('onClearText')}
                 cancelButtonTitle='Cancel'
@@ -129,14 +151,27 @@ const styles = StyleSheet.create({
         marginTop: '4%',
         alignSelf: "center",
         borderWidth: 0,
+        elevation:0,
+        shadowColor: 'rgba(0,0,0, .2)',
+        shadowOffset: { height: 0, width: 0 },
+        shadowOpacity: 0, //default is 1
+        shadowRadius: 0//default is 1
     },
     cardItemInner:{
         padding: 0,
+        borderWidth: 0,
+        elevation:0,
     },
     image:{
         width: '100%',
-        height: 220,
-        padding: 0
+        height: 210,
+        padding: 0,
+        borderRadius:6,
+    },
+    majorType: {
+        paddingBottom: 2,
+        color: _Color.mainColor,
+        fontWeight: 'bold'
     },
     areaText: {
         padding: '4%'
