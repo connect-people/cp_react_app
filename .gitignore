@@ -29,10 +29,11 @@ build/
 .gradle
 local.properties
 *.iml
+Pods/*
 
 # node.js
 #
-node_modules/
+node_modules/*
 npm-debug.log
 yarn-error.log
 
