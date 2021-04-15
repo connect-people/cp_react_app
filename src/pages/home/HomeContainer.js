@@ -2,13 +2,17 @@ import 'react-native-gesture-handler';
 import React, {useState, useEffect, useCallback} from 'react';
 import {View, Text, Image, SafeAreaView, StatusBar, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
 import { SearchBar } from 'react-native-elements';
-import { Card} from 'react-native-elements'
-import {getData} from './api'
-import _Color from '../../styles/_Colors'
+import { Card } from 'react-native-elements';
+import _ from 'lodash';
+import {getData} from './api';
+import _Color from '../../styles/_Colors';
 
  const HomeContainer = ({navigation}) => {
-    const [page, setPage] = useState(1);
+    const [keywords, setKeywords] = useState('')
+    const [query, setQuery] = useState('');
     const [list, setList] = useState([]);
+    const [page, setPage] = useState(1);
+    const [isLoading, setIsLoading] = useState(false);
     const [state, setState] = useState({
         keyword: '',
         data: [],
@@ -18,6 +22,10 @@ import _Color from '../../styles/_Colors'
             total: 1
         },
     })
+
+
+
+
     const { keyword, data, paging } = state;
     const updateSearch = (keyword) => {
       setState({ keyword });
@@ -26,18 +34,34 @@ import _Color from '../../styles/_Colors'
         if(!param.keyword){
             return;
         }
-    }
-    // state = {
-    //   search: '',
-    // };
 
-    // updateSearch = (search) => {
-    //   this.setState({ search });
-    // };
-    //  const { search } = this.state;
+    }
+    
+    const onChagneKeyword = (keywords) => {
+        console.log('keywords',keywords)
+        // setQuery(value);
+        // const search = _.debounce(sendQuery, 300);
+        // setSearchQuery(prevSearch => {
+        //     if(prevSearch.cancel){
+        //         prevSearch.cancel();
+        //     }
+        //     return search;
+        // })
+        // search(value);
+    }
+
+
+    const sendQuery = async (state) => {
+        console.log('@@@')
+        const dd = await callSearchKeyword(paging.page, paging.per_page, paging.keyword)
+        .then(response=>{
+            return response.data
+        })
+        setDd(...dd)
+        if(cancelPrevQuery) return;
+    }
     
     const ITEM_HEIGHT = 200;
-
     const getItemLayout = useCallback(
         (data, index) => ({
             length: ITEM_HEIGHT,
@@ -46,12 +70,23 @@ import _Color from '../../styles/_Colors'
         }), 
         []
     );    
+    
     useEffect(async () => {
         const list = await getData(page).then(response=>{
             return response.data.data;
         })
         setList((prev) => [...prev, ...list]);
-    }, [page]);
+    }, []);
+
+    useEffect(async () => {
+        console.log('1')
+        // await callSearchKeyword(paging.page, paging.per_page, paging.keyword)
+        // console.log('2')
+        // .then(response=>{
+        //     console.log('TEST',response)
+        //     return response.data
+        // })
+    }, []);
 
 
     const renderItem = useCallback(({ item, index, separators }) => (
@@ -84,21 +119,25 @@ import _Color from '../../styles/_Colors'
             </Card>
         </TouchableOpacity>    
     ))
-
     return (
     <>
         <StatusBar/>
           <SafeAreaView style={{ flex: 1, backgroundColor: '#fff', alignItems: 'center'}}>
           <View style={{ flex: 1, alignItems: 'center'}}>
+              {console.log('QUERY', query)}
             <SearchBar
                 placeholder="파트너를 검색해보세요."
-                onChangeText={updateSearch}
-                value={keyword}
-                // showLoading={false}
+                onChangeText={(val) => { setKeywords(val) }}
+                onSubmitEditing={
+                    ()=> {console.log(`User typed ${keywords}`)
+                    // onChagneKeyword(keywords)
+                    }
+
+                }
+                value={keywords} 
                 platform={Platform.OS}
                 clearIcon={true}
-                // onChangeText={(text) => params.handleSearch(text)}
-                // onClearText={() => console.log('onClearText')}
+                onClearText={() => console.log('onClearText')}
                 cancelButtonTitle='Cancel'
                 />
                 <FlatList
