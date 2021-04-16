@@ -1,8 +1,10 @@
 import axios from 'axios'
 const key = '80CFeBE4MD6JmhEfClBx7zqo1eGvwTl5EZgKyMQc'
+const host_api = 'https://api.connect-people.club'
 export const getData = async (page) => {
     try {
-        return await axios.get('http://52.78.173.151/boards',{
+        // return await axios.get('http://52.78.173.151/boards',{
+        return await axios.get(`${host_api}/v1/board/list`,{
             'x-api-key': key,
             params:{
             page: page,

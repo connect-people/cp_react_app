@@ -1,23 +1,26 @@
 import axios from 'axios';
 
 const key = '80CFeBE4MD6JmhEfClBx7zqo1eGvwTl5EZgKyMQc'
-export const getData = () => {
-        axios.get('http://52.78.173.151/boards/search-brand', {
+const host_api = 'https://api.connect-people.club'
+const token ='eyJhbGciOiJIUzUxMiIsImlhdCI6MTYxNzc3MDIzNCwiZXhwIjoxNjE3NzcwMjM0fQ.eyJtZW1iZXJfaWQiOjF9.fobbDXZODd-IwuSKtNbZgbkzfH6ntT3FrxLY_V6OWdyhLF__RYqFAc0tl3srE6vGbMgERkiiYYYVJBoiGR1K6Q'
+// 검색
+export const callSearchKeyword = async (paging, keyword) => {
+    console.log('page',page)
+    console.log('perPage',perPage)
+    console.log('keyword',keyword)
+    try {
+        return await axios.get(`${host_api}/v1/board/search-brand`, {
             'x-api-key': key,
-            params:{
-                keyword,
+            'token': token,
+            params: {
+                page: paging.page,
+                per_page : paging.per_page,
+                keyword
             }
         })
-        .then( response => { 
-            if(response){
-                console.warn(response)
-                const { data } = response.data
-                if(result.code === 1){
-                    console.log('response', response)
-                    return response;
-                    }
-                }
-            })
-        .catch(err => alert("글을 가져오는데 실패 했습니다."))
-    }
 
+    } catch (error) {
+        console.log('error',error)
+
+    }
+}

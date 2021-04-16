@@ -5,6 +5,7 @@ import { SearchBar } from 'react-native-elements';
 import { Card } from 'react-native-elements';
 import _ from 'lodash';
 import {getData} from './api';
+import {callSearchKeyword} from '../../API/api';
 import _Color from '../../styles/_Colors';
 
  const HomeContainer = ({navigation}) => {
@@ -23,9 +24,6 @@ import _Color from '../../styles/_Colors';
         },
     })
 
-
-
-
     const { keyword, data, paging } = state;
     const updateSearch = (keyword) => {
       setState({ keyword });
@@ -37,9 +35,15 @@ import _Color from '../../styles/_Colors';
 
     }
     
-    const onChagneKeyword = (keywords) => {
-        console.log('keywords',keywords)
-        // setQuery(value);
+    const onChagneKeyword = async(keyword) => {
+        const searchData = await callSearchKeyword(paging.page, paging.per_page, keyword)
+        .then(response=>{
+            console.log('[response]',response)
+            return response.data.data;
+        })
+        setList(searchData);
+        
+
         // const search = _.debounce(sendQuery, 300);
         // setSearchQuery(prevSearch => {
         //     if(prevSearch.cancel){
@@ -52,12 +56,12 @@ import _Color from '../../styles/_Colors';
 
 
     const sendQuery = async (state) => {
-        console.log('@@@')
-        const dd = await callSearchKeyword(paging.page, paging.per_page, paging.keyword)
+        const searchData = await callSearchKeyword(paging, keyword)
         .then(response=>{
-            return response.data
+            console.log('[response]',response)
+            return response.data.data;
         })
-        setDd(...dd)
+        setList(searchData);
         if(cancelPrevQuery) return;
     }
     
@@ -76,17 +80,7 @@ import _Color from '../../styles/_Colors';
             return response.data.data;
         })
         setList((prev) => [...prev, ...list]);
-    }, []);
-
-    useEffect(async () => {
-        console.log('1')
-        // await callSearchKeyword(paging.page, paging.per_page, paging.keyword)
-        // console.log('2')
-        // .then(response=>{
-        //     console.log('TEST',response)
-        //     return response.data
-        // })
-    }, []);
+    }, [page]);
 
 
     const renderItem = useCallback(({ item, index, separators }) => (
@@ -124,16 +118,10 @@ import _Color from '../../styles/_Colors';
         <StatusBar/>
           <SafeAreaView style={{ flex: 1, backgroundColor: '#fff', alignItems: 'center'}}>
           <View style={{ flex: 1, alignItems: 'center'}}>
-              {console.log('QUERY', query)}
             <SearchBar
                 placeholder="파트너를 검색해보세요."
                 onChangeText={(val) => { setKeywords(val) }}
-                onSubmitEditing={
-                    ()=> {console.log(`User typed ${keywords}`)
-                    // onChagneKeyword(keywords)
-                    }
-
-                }
+                onSubmitEditing={()=> {onChagneKeyword(keywords)}}
                 value={keywords} 
                 platform={Platform.OS}
                 clearIcon={true}

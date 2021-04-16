@@ -5,26 +5,34 @@ import { Header, Card, ListItem, Button, Icon } from 'react-native-elements'
 
 const CategoryContainer = () => {
     const DATA = [
-        {
-          title: "Main dishes",
-          data: ["Pizza", "Burger", "Risotto"]
+          {
+          title: {
+            id: 1, label: 'Main dishes1' ,
+          },
+          data: [
+            { id: 1, label: 'Money' },
+            { id: 2, label: 'Credit card' },
+            { id: 3, label: 'Debit card' },
+            { id: 4, label: 'Online payment' },
+            { id: 5, label: 'Bitcoin' },
+          ]
         },
         {
-          title: "Sides",
-          data: ["French Fries", "Onion Rings", "Fried Shrimps"]
+          title: {
+            id: 1, label: 'Main dishes1' ,
+          },
+          data: [
+            { id: 1, label: 'Money' },
+            { id: 2, label: 'Credit card' },
+            { id: 3, label: 'Debit card' },
+            { id: 4, label: 'Online payment' },
+            { id: 5, label: 'Bitcoin' },
+          ]
         },
-        {
-          title: "Drinks",
-          data: ["Water", "Coke", "Beer"]
-        },
-        {
-          title: "Desserts",
-          data: ["Cheese Cake", "Ice Cream"]
-        }
     ];
     const Item = ({ title }) => (
         <View style={styles.item}>
-          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.title}>{title.label}</Text>
         </View>
     );
       
@@ -48,7 +56,7 @@ const CategoryContainer = () => {
                 numColumns={2}                  // set number of columns 
                 columnWrapperStyle={styles.row}  // space them out evenly
                 keyExtractor={(item, index) => item + index}
-                renderItem={({ item }) => <Item title={item} />}
+                renderItem={({ item }) => <Item title={item.label} />}
                 renderSectionHeader={({ section: { title } }) => (
                     <Text style={styles.header}>{title}</Text>
                 )}
