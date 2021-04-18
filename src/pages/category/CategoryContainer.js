@@ -7,7 +7,7 @@ const CategoryContainer = () => {
     const DATA = [
           {
           title: {
-            id: 1, label: 'Main dishes1' ,
+            id: 1, label: 'Main dishes1'
           },
           data: [
             { id: 1, label: 'Money' },
@@ -19,7 +19,7 @@ const CategoryContainer = () => {
         },
         {
           title: {
-            id: 1, label: 'Main dishes1' ,
+            id: 1, label: 'Main dishes1'
           },
           data: [
             { id: 1, label: 'Money' },
@@ -56,9 +56,9 @@ const CategoryContainer = () => {
                 numColumns={2}                  // set number of columns 
                 columnWrapperStyle={styles.row}  // space them out evenly
                 keyExtractor={(item, index) => item + index}
-                renderItem={({ item }) => <Item title={item.label} />}
+                renderItem={({ item }) => <Item title={item} />}
                 renderSectionHeader={({ section: { title } }) => (
-                    <Text style={styles.header}>{title}</Text>
+                    <Text style={styles.header}>{title.label}</Text>
                 )}
             />
         </View>
@@ -70,7 +70,6 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingTop: StatusBar.currentHeight,
         marginHorizontal: 16,
-        backgroundColor: 'red',
         flexDirection: 'row',
         flexWrap: 'wrap',
         width: '100%',

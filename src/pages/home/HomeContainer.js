@@ -42,21 +42,12 @@ import _Color from '../../styles/_Colors';
             return response.data.data;
         })
         setList(searchData);
-        
-
-        // const search = _.debounce(sendQuery, 300);
-        // setSearchQuery(prevSearch => {
-        //     if(prevSearch.cancel){
-        //         prevSearch.cancel();
-        //     }
-        //     return search;
-        // })
-        // search(value);
+        if(cancelPrevQuery) return;
     }
 
 
-    const sendQuery = async (state) => {
-        const searchData = await callSearchKeyword(paging, keyword)
+    const sendQuery = async () => {
+        const searchData = await callSearchKeyword(paging.page, paging.per_page, keyword)
         .then(response=>{
             console.log('[response]',response)
             return response.data.data;
@@ -80,6 +71,7 @@ import _Color from '../../styles/_Colors';
             return response.data.data;
         })
         setList((prev) => [...prev, ...list]);
+        console.log('list', list)
     }, [page]);
 
 
@@ -128,6 +120,7 @@ import _Color from '../../styles/_Colors';
                 onClearText={() => console.log('onClearText')}
                 cancelButtonTitle='Cancel'
                 />
+                {list &&
                 <FlatList
                     numColumns={2}  
                     columnWrapperStyle={styles.row}
@@ -138,7 +131,7 @@ import _Color from '../../styles/_Colors';
                     onEndReachedThreshold={0.8}
                     initialNumToRender={20}
                     removeClippedSubviews={true}
-                />
+                />}
             </View>
         </SafeAreaView>
         </>
@@ -166,9 +159,6 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         textAlign: 'left',
     },
-
-
-
     //card
     cardItemOuter:{
         width: '100%',

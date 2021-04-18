@@ -1,14 +1,7 @@
-/**
- * Sample React Native HomeScreen
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
- import 'react-native-gesture-handler';
- import React, {Component, useState} from 'react';
- import {View, Text, Button, StyleSheet} from 'react-native';
- import { Header } from 'react-native-elements';
+import 'react-native-gesture-handler';
+import React, {Component, useState} from 'react';
+import {View, Text, Button, StyleSheet} from 'react-native';
+import { Header } from 'react-native-elements';
 import { TextInput } from 'react-native-gesture-handler';
 
 

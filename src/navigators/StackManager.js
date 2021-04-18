@@ -5,16 +5,16 @@ import {NavigationContainer} from '@react-navigation/native'
 import {createStackNavigator} from '@react-navigation/stack'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import {
-  HomeContainer, 
-  WriteContainer, 
-  SearchContainer, 
-  CategoryContainer, 
-  UserContainer,
-  LoginContainer,
-  UserNeedLogin,
-  JoinContainer,
-  HomeSearchContainer,
-  HomeDescContainer
+    HomeContainer, 
+    WriteContainer, 
+    SearchContainer, 
+    CategoryContainer, 
+    UserContainer,
+    LoginContainer,
+    UserNeedLogin,
+    JoinContainer,
+    HomeSearchContainer,
+    HomeDescContainer
 } from '../pages'
 import _Colors from '../styles/_Colors';
 const Stack = createStackNavigator();
