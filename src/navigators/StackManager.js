@@ -6,7 +6,8 @@ import {createStackNavigator} from '@react-navigation/stack'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import {
     HomeContainer, 
-    WriteContainer, 
+    WriteContainer,
+    WriteTag, 
     SearchContainer, 
     CategoryContainer, 
     UserContainer,
@@ -16,6 +17,7 @@ import {
     HomeSearchContainer,
     HomeDescContainer
 } from '../pages'
+import { MajorCategory, MinorCategory } from '../component/templates'
 import _Colors from '../styles/_Colors';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -112,6 +114,24 @@ export default function StackManager() {
             <Stack.Screen 
               name="DetailPage" 
               component={HomeDescContainer}
+              options={{
+                title: '',
+              }}/>
+              <Stack.Screen 
+              name="WriteTag" 
+              component={WriteTag}
+              options={{
+                title: '',
+              }}/>
+              <Stack.Screen 
+              name="MajorCategory" 
+              component={MajorCategory}
+              options={{
+                title: '',
+              }}/>
+              <Stack.Screen 
+              name="MinorCategory" 
+              component={MinorCategory}
               options={{
                 title: '',
               }}/>

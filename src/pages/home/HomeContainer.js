@@ -38,7 +38,6 @@ import _Color from '../../styles/_Colors';
     const onChagneKeyword = async(keyword) => {
         const searchData = await callSearchKeyword(paging.page, paging.per_page, keyword)
         .then(response=>{
-            console.log('[response]',response)
             return response.data.data;
         })
         setList(searchData);
@@ -49,7 +48,6 @@ import _Color from '../../styles/_Colors';
     const sendQuery = async () => {
         const searchData = await callSearchKeyword(paging.page, paging.per_page, keyword)
         .then(response=>{
-            console.log('[response]',response)
             return response.data.data;
         })
         setList(searchData);
@@ -65,13 +63,11 @@ import _Color from '../../styles/_Colors';
         }), 
         []
     );    
-    
     useEffect(async () => {
         const list = await getData(page).then(response=>{
             return response.data.data;
         })
         setList((prev) => [...prev, ...list]);
-        console.log('list', list)
     }, [page]);
 
 

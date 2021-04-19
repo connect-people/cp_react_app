@@ -16,20 +16,3 @@ export const getData = async (page) => {
       console.wran(error);
     }
 }
-
-
-export const callSearchKeyword = async (page, perPage, keyword) => {
-    console.log('TEST')
-    try {
-        return await axios.get(`http://52.78.173.151/v1/board/search-brand`, {
-            'x-api-key': key,
-            params: {
-                page,
-                per_page : perPage,
-                keyword
-            }
-        })
-    } catch (error) {
-
-    }
-}

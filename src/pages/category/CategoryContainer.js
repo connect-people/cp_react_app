@@ -1,47 +1,92 @@
 import 'react-native-gesture-handler';
-import React, {Component} from 'react';
-import { View, Text, Image, StyleSheet, SectionList, StatusBar } from 'react-native'
+import React, {useState, useEffect} from 'react';
+import { View, Text, Alert, Image, StyleSheet, SectionList, StatusBar } from 'react-native'
 import { Header, Card, ListItem, Button, Icon } from 'react-native-elements'
+import { TagSelect } from 'react-native-tag-select';
+import { callCMajorCategory, callCMinorCategory } from '../../../src/API/api'
 
 const CategoryContainer = () => {
-    const DATA = [
-          {
-          title: {
-            id: 1, label: 'Main dishes1'
-          },
-          data: [
-            { id: 1, label: 'Money' },
-            { id: 2, label: 'Credit card' },
-            { id: 3, label: 'Debit card' },
-            { id: 4, label: 'Online payment' },
-            { id: 5, label: 'Bitcoin' },
-          ]
-        },
-        {
-          title: {
-            id: 1, label: 'Main dishes1'
-          },
-          data: [
-            { id: 1, label: 'Money' },
-            { id: 2, label: 'Credit card' },
-            { id: 3, label: 'Debit card' },
-            { id: 4, label: 'Online payment' },
-            { id: 5, label: 'Bitcoin' },
-          ]
-        },
+    const [category, setCategory] = useState([
+            {
+            medium_id: 1,
+            medium_label:'',
+            minor: [
+                {
+                    minor_id: 1,
+                    minor_label: ''
+                }
+            ]
+        }
+    ])
+    const data = [
+        { id: 1, label: 'Money' },
+        { id: 2, label: 'Credit card' },
+        { id: 3, label: 'Debit card' },
+        { id: 4, label: 'Online payment' },
+        { id: 5, label: 'Bitcoin' },
     ];
-    const Item = ({ title }) => (
-        <View style={styles.item}>
-          <Text style={styles.title}>{title.label}</Text>
-        </View>
-    );
-      
+    const getTag = category.map((v, i) => {
+        return (
+            <View key={i}>{console.log('v.minor :: ', v.minor)}
+                <Text style={styles.labelText}>{v.medium_label}</Text>
+                {/* {v.minor.map((item, i) => {
+                    return ( */}
+                        <TagSelect
+                            keyAttr={data.id}
+                            data={data}
+                            // max={3}
+                            // onMaxError={() => {
+                            //     Alert.alert('Ops', 'Max reached');
+                            // }}
+                            ref={(tag) => {
+                                this.tag = tag;
+                            }}
+                            itemStyle={styles.item}
+                            itemLabelStyle={styles.label}
+                            itemStyleSelected={styles.itemSelected}
+                            itemLabelStyleSelected={styles.labelSelected}       
+                        />
+                        {/* {console.log('item',item)}
+                        </TagSelect>
+                    )
+                })} */}
+            </View>
+        )
+    })
+
+    const changeDBFormet = (category) => {
+        dbFormat = {
+            medium_id: 1,
+            medium_label:'',
+            minor: [
+                {
+                    id: category.minor.minor_id,
+                    label: category.minor.minor_label
+                }
+            ]
+        }
+        return dbFormat
+    }
+    useEffect(async() => {
+        const categoryArr = await callCMinorCategory().then(response => {
+            console.log('response.data', response.data)
+            console.log('response.data.data', response.data.data)
+            return response.data.data;
+        })
+        setCategory([
+            ...categoryArr,
+        ])
+    }, [])
+    const onPressTitle = () => {
+        Alert.alert('Selected items:', JSON.stringify(this.tag.itemsSelected));
+    }
     return (
       <>
         <Header
           leftComponent={{ color: '#fff' }}
           centerComponent={{ text: '카테고리', style: { color: '#fff', fontSize:20, fontWeight:'600' }}}
-          rightComponent={{ color: '#fff' }}
+        //   rightComponent={{ icon: 'chevron-right', color: '#fff', }}
+          rightComponent={{ icon: 'chevron-right', color: '#fff', }}
           backgroundColor='#7534E2'
           style={{
             flex:2,
@@ -51,52 +96,64 @@ const CategoryContainer = () => {
         />
         <View style={styles.container}
         >
-            <SectionList
-                sections={DATA}
-                numColumns={2}                  // set number of columns 
-                columnWrapperStyle={styles.row}  // space them out evenly
-                keyExtractor={(item, index) => item + index}
-                renderItem={({ item }) => <Item title={item} />}
-                renderSectionHeader={({ section: { title } }) => (
-                    <Text style={styles.header}>{title.label}</Text>
-                )}
-            />
+            {/* <Text style={styles.labelText}>Payment:</Text>
+            <TagSelect
+            data={data}
+            // max={3}
+            ref={(tag) => {
+                this.tag = tag;
+            }}
+            // onMaxError={() => {
+            //     Alert.alert('Ops', 'Max reached');
+            // }}
+            /> */}
+            {getTag}
+            <View style={styles.buttonContainer}>
+                <View>
+                    <Button
+                    title="Get selected"
+                    onPress={() => {
+                        Alert.alert('Selected items:', JSON.stringify(this.tag.itemsSelected));
+                    }}
+                    />
+                </View>
+            </View>
         </View>
       </>
     )
 }
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        paddingTop: StatusBar.currentHeight,
-        marginHorizontal: 16,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        width: '100%',
-        alignSelf: 'center',
-        textAlign: 'left',
-        alignItems: 'stretch',
+      flex: 1,
+      marginTop: 50,
+      marginLeft: 15,
     },
-    row: {
-        flex: 1,
-        justifyContent: "space-around"
+    buttonContainer: {
+      padding: 15,
+    },
+    buttonInner: {
+      marginBottom: 15,
+    },
+    labelText: {
+      color: '#333',
+      fontSize: 15,
+      fontWeight: '500',
+      marginBottom: 15,
     },
     item: {
-        backgroundColor: '#ddd',
-        width: '40%',
-        padding: 10,
-        marginVertical: 8,
-        justifyContent: 'space-between',
-        alignContent: 'space-between',
+      borderWidth: 1,
+      borderColor: '#333',    
+      backgroundColor: 'transparent',
     },
-    header: {
-        fontSize: 16,
-        padding: 20,
-        backgroundColor: '#fff'
+    label: {
+      color: '#333'
     },
-    title: {
-        fontSize: 14,
-    }
+    itemSelected: {
+      backgroundColor: '#333',
+    },
+    labelSelected: {
+      color: '#FFF',
+    },
   });
  
  export default CategoryContainer;

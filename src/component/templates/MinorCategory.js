@@ -1,8 +1,8 @@
 import 'react-native-gesture-handler';
 import React, {Component} from 'react';
 import {View, Text, Button} from 'react-native';
-const WriteTag = (props) =>  {
-    const { majorID } = props.route.params;
+ 
+const MinorCategory = () => {
     return (
         <View style={{
                 flex:1,
@@ -10,11 +10,11 @@ const WriteTag = (props) =>  {
                 justifyContent: 'center'
             }}
         >
-            <Text>{majorID}</Text>
-        </View>
+           <Text>MinorCategory Screen</Text>
+       </View>
     )
-}
-
-
-export default WriteTag;
+ }
+ 
+ 
+ export default MinorCategory;
  
