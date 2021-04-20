@@ -41,3 +41,8 @@ yarn-error.log
 buck-out/
 \.buckd/
 *.keystore
+
+
+# config
+
+src/config/index.js

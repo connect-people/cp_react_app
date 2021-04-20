@@ -7,9 +7,22 @@ import _ from 'lodash';
 import {getData} from './api';
 import {callSearchKeyword} from '../../API/api';
 import _Color from '../../styles/_Colors';
+import { useSelector, useDispatch } from 'react-redux';
+import * as actions from '../../redux/actions'
 
  const HomeContainer = ({navigation}) => {
-    const [keywords, setKeywords] = useState('')
+    const dispatch = useDispatch();
+    const keywords = useSelector((state)=>state.keywords)
+    //const keywords = "ddd"
+    //const keywords = useSelector((state)=>state.)
+    // const {keywords} = useSelector((state)=>{
+    //     console.log(state);
+    //     // return{
+    //     //     keywords: state.searchStore.keywords
+    //     // }
+    // })
+
+    const [keywordData, setKeywordData] = useState('')
     const [query, setQuery] = useState('');
     const [list, setList] = useState([]);
     const [page, setPage] = useState(1);
@@ -35,40 +48,58 @@ import _Color from '../../styles/_Colors';
 
     }
     
-    const onChagneKeyword = async(keyword) => {
-        const searchData = await callSearchKeyword(paging.page, paging.per_page, keyword)
-        .then(response=>{
-            return response.data.data;
-        })
-        setList(searchData);
-        if(cancelPrevQuery) return;
+    const onChagneKeyword = (keyword) => {
+        // const searchData = await callSearchKeyword(paging.page, paging.per_page, keyword)
+        // .then(response=>{
+        //     console.log('[response]',response)
+        //     return response.data.data;
+        // })
+        // setList(searchData);
+
+        console.log("onChagneKeyword")
+
+        const payload = {
+            page : paging.page,
+            per_page : paging.per_page,
+            keyword : keyword,
+        }
+
+        dispatch(actions.getSearchKeyword(payload));
+        
+        // if(cancelPrevQuery) return;
     }
 
 
     const sendQuery = async () => {
         const searchData = await callSearchKeyword(paging.page, paging.per_page, keyword)
         .then(response=>{
+            console.log('[response]',response)
             return response.data.data;
         })
         setList(searchData);
         if(cancelPrevQuery) return;
     }
     
-    const ITEM_HEIGHT = 200;
-    const getItemLayout = useCallback(
-        (data, index) => ({
-            length: ITEM_HEIGHT,
-            offset: ITEM_HEIGHT * index,
-            index,    
-        }), 
-        []
-    );    
+    // const getItemLayout = useCallback(
+    //     (data, index) => ({
+    //         length: ITEM_HEIGHT,
+    //         offset: ITEM_HEIGHT * index,
+    //         index,    
+    //     }), 
+    //     []
+    // );    
+    
     useEffect(async () => {
         const list = await getData(page).then(response=>{
             return response.data.data;
         })
         setList((prev) => [...prev, ...list]);
+        console.log('list', list)
     }, [page]);
+
+    useEffect(()=>{
+     console.log("keywords----------", keywords)
+    },[keywords])
 
 
     const renderItem = useCallback(({ item, index, separators }) => (
@@ -108,9 +139,9 @@ import _Color from '../../styles/_Colors';
           <View style={{ flex: 1, alignItems: 'center'}}>
             <SearchBar
                 placeholder="파트너를 검색해보세요."
-                onChangeText={(val) => { setKeywords(val) }}
-                onSubmitEditing={()=> {onChagneKeyword(keywords)}}
-                value={keywords} 
+                onChangeText={(val) => { setKeywordData(val) }}
+                onSubmitEditing={()=> {onChagneKeyword(keywordData)}}
+                value={keywordData} 
                 platform={Platform.OS}
                 clearIcon={true}
                 onClearText={() => console.log('onClearText')}
@@ -123,7 +154,7 @@ import _Color from '../../styles/_Colors';
                     data={list}
                     keyExtractor={(item) => item.ID}
                     renderItem={renderItem}
-                    getItemLayout={getItemLayout}
+                    // getItemLayout={getItemLayout}
                     onEndReachedThreshold={0.8}
                     initialNumToRender={20}
                     removeClippedSubviews={true}
