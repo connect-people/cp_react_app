@@ -22,6 +22,11 @@ import _Colors from '../styles/_Colors';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
+const requireAuth = (to, from, next) => {
+  const isAuth = localStorage.getItem('token')
+  const loginPath = `/login?rPath=${encodeURICompoent(to.path)}`
+  isAuth ? next() : next(loginPath)
+}
 MainScreen = () => {
   return(
         <Tab.Navigator
