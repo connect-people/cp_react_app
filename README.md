@@ -1,15 +1,15 @@
 # cp.react.app.
-connect-people v2.0
-Framework : React Native
+connect-people v2.0  
+Framework : React Native  
 [connect-people v2.0 tech-spec](https://www.notion.so/connect-people-v2-0-tech-spec-f817ea6242fa42d88cbd29085bce1a29)
 
 ## 아래 순서대로 설치
-npm install
-confing < index.js (HOST API, KEY, TOKEN) 정보 파일 넣기 
+npm install  
+confing < index.js (HOST API, KEY, TOKEN) 정보 파일 넣기  
 
 ## 실행방법
-npm start
-react-native run-ios
+npm start  
+react-native run-ios  
 
 ## 파일구성
 - config : index.js HOST API, KEY, TOKEN 정보가 있음.
