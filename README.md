@@ -20,4 +20,5 @@ react-native run-ios
    - navigators : 화면 구성 STACK ROUTER 모음 파일
    - page : 페이지 구성
    - redux : 상태관리
-   - styles : 전체 적용 되는 style sheet
+   - styles : 전체 적용 되는 style sheet\
+   - node version v12.22.0

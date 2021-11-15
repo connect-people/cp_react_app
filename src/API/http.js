@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const http = {
     get: (obj) => {
-        return axios.get(obj.url, { params: obj.params});
+        return axios.get(obj.url, { params: obj.params });
     },
     post: (obj) => {
         return axios.post(obj.url, obj.params);
